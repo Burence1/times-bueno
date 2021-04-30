@@ -144,3 +144,20 @@ def update_profile(uname):
         return redirect(url_for('.profile', uname=user.username))
 
     return render_template('profile/update.html', form=form)
+
+
+@main.route('/blogs/<blog_id>', methods=['GET', 'POST'])
+@login_required
+def blogs(blog_id):
+    blog = Blog.get_blogs(blog_id)
+    if blog is None:
+        abort(404)
+    all_comments = Comment.get_comments(blog.id)
+    comment_form = AddComment()
+    if comment_form.validate_on_submit():
+        comment = Comment(contents=comment_form.contents.data,user=current_user, blog_id=blog_id)
+        comment.save_comments()
+
+        flash('Your comment has been added!', 'success')
+        return redirect(url_for('main.blogs', blog_id=blog.id))
+    return render_template('blog.html', blog=blog, comments=all_comments, comment_form=comment_form)
