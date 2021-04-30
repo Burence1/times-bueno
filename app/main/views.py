@@ -35,3 +35,17 @@ def new_blog():
 
   title="Add your blog"
   return render_template('new_blog.html',title=title,form=form)
+
+@main.route('/new_comment',methods=["GET","POST"])
+def new_comment():
+  form=AddComment()
+  if form.validate_on_submit():
+    contents=form.contents.data
+    user=current_user
+    comment=Comment(contents=contents,user=user)
+    comment.save_comments()
+
+    flash("Comment posted")
+    return redirect(url_for('main.index'))
+
+  return render_template('new_comment.html',form=form)
