@@ -16,7 +16,7 @@
         {% if current_user.is_authenticated %}
         <li class="nav-item">
           <a class="nav-link" style="color: black;"
-            href="{{url_for('main.index',uname=current_user.username)}}">Profile</a>
+            href="{{url_for('main.profile',uname=current_user.username)}}">Profile</a>
         </li>
         <li><a class="nav-link" href="{{url_for('auth.logout')}}" style="color: black;">Sign out</a></li><br>
         {% else %}

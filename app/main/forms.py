@@ -20,3 +20,8 @@ class AddSubscriber(FlaskForm):
   name=StringField("Enter your name",validators=[Required()])
   email=StringField("Enter your email",validators=[Required()])
   submit=SubmitField("Subscribe")
+
+
+class UpdateProfile(FlaskForm):
+    bio = TextAreaField('Tell us about you.', validators=[Required()])
+    submit = SubmitField('Submit')
