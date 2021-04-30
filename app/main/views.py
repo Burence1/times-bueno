@@ -80,3 +80,25 @@ def delete_blog(blog_id):
   
   flash("blog deleted")
   return redirect('main.index')
+
+@main.route('/update_blog/<blog_id>',methods=["GET","POST"])
+@login_required
+def update_blog(blog_id):
+  blog=Blog.query.get_blogs(blog_id)
+  if blog.user != current_user:
+    abort(404)
+  form=AddBlog()
+  if form.validate_on_submit():
+    title = form.title.data
+    filename = photos.save(form.photo.data)
+    image_pic_path = photos.url(filename)
+    contents = form.contents.data
+    user = current_user
+    db.session.commit()
+    flash("Blog Updated")
+    return redirect(url_for('main.index',blog_id=blog_id))
+  elif request.method == 'GET':
+    form.title.data=blog.title
+    form.contents.data=blog.contents
+    title="Update blog"
+    return render_template('new_blog',title=title,form=form)
