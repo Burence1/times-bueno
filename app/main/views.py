@@ -26,7 +26,7 @@ def new_blog():
   if form.validate_on_submit():
     title=form.title.data
     filename=photos.save(form.photo.data)
-    image_pic_path = photos.url(filename)
+    image_pic_path = f'photos/{filename}'
     contents=form.contents.data
     user=current_user
     blog=Blog(title=title,contents=contents,user=user,image_pic_path=image_pic_path)

@@ -95,6 +95,11 @@ class Blog(db.Model):
   def get_blogs(cls,id):
     blogs=Blog.query.filter_by(id=id).first()
     return blogs
+  
+  @classmethod
+  def all_blogs(cls):
+    blogs=Blog.query.all()
+    return blogs
 
   def __repr__(self):
     return f"Blog {self.title}:{self.contents}"
