@@ -72,6 +72,7 @@ class Blog(db.Model):
 
   id=db.Column(db.Integer,primary_key=True)
   title=db.Column(db.String(150))
+  image_pic_path = db.Column(db.String(255))
   contents=db.Column(db.String())
   posted_on=db.Column(db.DateTime,default=datetime.utcnow)
   user_id=db.Column(db.Integer,db.ForeignKey("users.id"))

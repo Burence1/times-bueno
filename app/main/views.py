@@ -3,7 +3,7 @@ from flask import url_for,request,redirect,render_template,abort,flash
 from . import main
 from ..models import User,Blog,Comment,Subscribe
 from flask_login import current_user,login_required
-from .. import db
+from .. import db,photos
 
 
 @main.route('/')
@@ -25,9 +25,11 @@ def new_blog():
   form=AddBlog()
   if form.validate_on_submit():
     title=form.title.data
+    filename=photos.save(form.photo.data)
+    image_pic_path = photos.url(filename)
     contents=form.contents.data
     user=current_user
-    blog=Blog(title=title,contents=contents,user=user)
+    blog=Blog(title=title,contents=contents,user=user,image_pic_path=image_pic_path)
     blog.save_blogs()
 
     flash("Blog successfully saved")
