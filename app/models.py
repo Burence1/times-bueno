@@ -12,7 +12,7 @@ class User(UserMixin,db.Model):
   __tablename__='users'
 
   id = db.Column(db.Integer,primary_key=True)
-  username=db.Column(db.String(255),index=True)
+  username=db.Column(db.String(50),index=True)
   email=db.Column(db.String(255),unique=True)
   bio=db.Column(db.String(255))
   password_hash=db.Column(db.String(255))
@@ -71,6 +71,7 @@ class Blog(db.Model):
   __tablename__='blogs'
 
   id=db.Column(db.Integer,primary_key=True)
+  title=db.Column(db.String(150))
   contents=db.Column(db.String(255))
   posted_on=db.Column(db.DateTime,default=datetime.utcnow)
   user_id=db.column(db.Integer,db.ForeignKey("users.id"))
@@ -90,4 +91,22 @@ class Blog(db.Model):
     return blogs
 
   def __repr__(self):
-    return f"Blog {self.contents}"
+    return f"Blog {self.title}:{self.contents}"
+
+class Subscribe(db.Model):
+  __tablename__='subscribes'
+
+  id =db.Column(db.Integer,primary_key=True)
+  name=db.Column(db.String(50),index=True)
+  email=db.Column(db.String(255),unique=True)
+
+  def save_subscriber(self):
+    db.session.add(self)
+    db.session.commit()
+
+  def delete_subscriber(self):
+    db.session.delete(self)
+    db.session.commit()
+
+  def __repr__(self):
+    return f"Subscribe {self.email}"
