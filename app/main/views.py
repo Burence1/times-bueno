@@ -51,3 +51,9 @@ def new_comment():
     return redirect(url_for('main.index'))
 
   return render_template('new_comment.html',form=form)
+
+@main.route('/user_blogs/<string:username>',methods=["GET","POST"])
+def user_blogs(username):
+  user=User.query.filter_by(username=username).first()
+  blog=Blog.query.filter_by(user=user).order_by(Blog.posted_on.desc()).all()
+  return render_template("profile.html",blog=blog,user=user)
