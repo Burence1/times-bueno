@@ -48,7 +48,7 @@ def new_comment():
     comment.save_comments()
 
     flash("Comment posted")
-    return redirect(url_for('main.index'))
+    return redirect(url_for('main.comment'))
 
   return render_template('new_comment.html',form=form)
 
@@ -68,9 +68,9 @@ def delete_comment(blog_id,comment_id):
   blog.delete_comment()
 
   flash("comment deleted")
-  return redirect(url_for('main.index'))
+  return redirect(url_for('main.comment'))
 
-@main.route('/del_blog/<blog_id>',methods=["POST"])
+@main.route('/del_blog/<blog_id>',methods=["POST","GET"])
 @login_required
 def delete_blog(blog_id):
   blog=Blog.get_blogs(blog_id)
@@ -79,7 +79,7 @@ def delete_blog(blog_id):
   blog.delete_blogs()
   
   flash("blog deleted")
-  return redirect('main.index')
+  return redirect(url_for('main.index'))
 
 @main.route('/update_blog/<blog_id>',methods=["GET","POST"])
 @login_required
