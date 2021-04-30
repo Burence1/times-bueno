@@ -15,14 +15,13 @@ db = SQLAlchemy()
 def create_app(config_name):
   app=Flask(__name__)
 
+  #app configurations
+  app.config.from_object(config_options[config_name])
+
   #initializing flask extensions
   bootstrap.init_app(app)
   db.init_app(app)
   login_manager.init_app(app)
-
-
-  #app configurations
-  app.config.from_object(config_options[config_name])
 
   #Register blueprints
   from .main import main as main_blueprint

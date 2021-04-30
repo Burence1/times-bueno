@@ -72,9 +72,9 @@ class Blog(db.Model):
 
   id=db.Column(db.Integer,primary_key=True)
   title=db.Column(db.String(150))
-  contents=db.Column(db.String(255))
+  contents=db.Column(db.String())
   posted_on=db.Column(db.DateTime,default=datetime.utcnow)
-  user_id=db.column(db.Integer,db.ForeignKey("users.id"))
+  user_id=db.Column(db.Integer,db.ForeignKey("users.id"))
   comment_id=db.Column(db.Integer,db.ForeignKey("comments.id"))
 
   def save_blogs(self):

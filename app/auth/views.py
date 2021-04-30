@@ -16,7 +16,7 @@ def register():
     return redirect(url_for('auth.login'))
 
   title="Registration"
-  return render_template('auth/reigister.html',registration_form=form,title=title)
+  return render_template('auth/register.html',registration_form=form,title=title)
 
 @auth.route("/login",methods=["GET","POST"])
 def login():
@@ -35,6 +35,6 @@ def login():
 @auth.route("/logout")
 @login_required
 def logout():
-  login_user()
+  logout_user()
   flash("Logged out")
   return redirect(url_for("main.index"))
