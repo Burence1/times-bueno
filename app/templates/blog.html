@@ -50,17 +50,19 @@
           <div class="card-comments mb-3">
             <div class="card-body">
               <div class="media d-block d-md-flex mt-4">
-                <img class="d-flex mb-3 mx-auto "
-                  src="{{url_for('static',filename=comment.user.profile_pic_path)}}"
+                <img class="d-flex mb-3 mx-auto " src="{{url_for('static',filename=comment.user.profile_pic_path)}}"
                   alt="Generic placeholder image"
-                  style="width: 80px;height: 80px;object-fit: cover; border-radius: 40px;">
+                  style="width: 80px;height: 80px;object-fit: cover; border-radius: 50%;">
                 <div class="media-body text-center text-md-left ml-md-3 ml-0">
                   <h5 class="mt-0 font-weight-bold">{{comment.user.username}}</h5>
                   {{comment.contents}}
                 </div>
-                {% if blog.author == current_user%}
-                <button class="btn-sm m-1 btn-delete" data-toggle="modal" data-target="#deleteCommentModal"><i
-                    class="fas fa-trash-alt"></i>&nbsp;&nbsp;Delete</button>
+                {% if blog.user == current_user%}
+                <div class="col-md-2">
+                  <h5><a class="nav-link" style="color: black;"
+                      href="{{url_for('main.delete_comment',blog_id=blog.id,comment_id=comment.id)}}"><i class="fa fa-trash"
+                        aria-hidden="true"></i> Delete Comment</h5></a>
+                </div>
                 {%endif%}
               </div>
             </div>
@@ -73,32 +75,7 @@
           {{wtf.quick_form(comment_form)}}
         </div>
       </div>
-      <div class="col-md-2"></div>
     </div>
-
   </div>
 </main>
-<!--Main layout-->
-{%for comment in comments%}
-<div class="modal fade" id="deleteCommentModal" tabindex="-1" role="dialog" aria-labelledby="deleteCommentModalLabel"
-  aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="deleteCommentModalLabel">Delete comment?</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn-secondary" data-dismiss="modal">Cancel</button>
-        <form action="{{url_for('main.delete_comment',blog_id=blog.id, comment_id=comment.id)}}" method="POST"
-          style="display: inline;">
-          <button type="submit" class="btn-danger">Yes, delete comment</button>
-        </form>
-      </div>
-    </div>
-  </div>
-</div>
-{%endfor%}
 {%endblock%}

@@ -58,17 +58,17 @@ def user_blogs(username):
   blog=Blog.query.filter_by(user=user).order_by(Blog.posted_on.desc()).all()
   return render_template("profile.html",blog=blog,user=user)
 
-@main.route('/del_comment/<blog_id>/<comment_id>',methods=["POST"])
+@main.route('/del_comment/<blog_id>/<comment_id>',methods=["POST","GET"])
 @login_required
 def delete_comment(blog_id,comment_id):
   blog=Blog.get_blogs(blog_id)
   comment=Comment.get_comment(comment_id)
   if blog.user != current_user:
     abort(404)
-  blog.delete_comment()
+  comment.delete_comment()
 
   flash("comment deleted")
-  return redirect(url_for('main.comment'))
+  return redirect(url_for('main.blogs',blog_id=blog.id,comment_id=comment.id))
 
 @main.route('/del_blog/<blog_id>',methods=["POST","GET"])
 @login_required
@@ -152,7 +152,7 @@ def blogs(blog_id):
     blog = Blog.get_blogs(blog_id)
     if blog is None:
         abort(404)
-    all_comments = Comment.get_comments(blog.id)
+    all_comments = Comment.get_comments(blog_id)
     comment_form = AddComment()
     if comment_form.validate_on_submit():
         comment = Comment(contents=comment_form.contents.data,user=current_user, blog_id=blog_id)
