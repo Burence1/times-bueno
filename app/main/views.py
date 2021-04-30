@@ -57,3 +57,26 @@ def user_blogs(username):
   user=User.query.filter_by(username=username).first()
   blog=Blog.query.filter_by(user=user).order_by(Blog.posted_on.desc()).all()
   return render_template("profile.html",blog=blog,user=user)
+
+@main.route('/del_comment/<blog_id>/<comment_id>',methods=["POST"])
+@login_required
+def delete_comment(blog_id,comment_id):
+  blog=Blog.get_blogs(blog_id)
+  comment=Comment.get_comment(comment_id)
+  if blog.user != current_user:
+    abort(404)
+  blog.delete_comment()
+
+  flash("comment deleted")
+  return redirect(url_for('main.index'))
+
+@main.route('/del_blog/<blog_id>',methods=["POST"])
+@login_required
+def delete_blog(blog_id):
+  blog=Blog.get_blogs(blog_id)
+  if blog.user != current_user:
+    abort(404)
+  blog.delete_blogs()
+  
+  flash("blog deleted")
+  return redirect('main.index')

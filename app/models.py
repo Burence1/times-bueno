@@ -63,6 +63,11 @@ class Comment(db.Model):
   def get_comments(cls,id):
     comments=Comment.query.all(id=id)
     return comments
+  
+  @classmethod
+  def get_comment(cls,id):
+    comment=Comment.query.filter_by(id=id).first()
+    return comment
 
   def __repr__(self):
     return f"Comment {self.contents}"
