@@ -9,6 +9,10 @@
         <li class="nav-item active">
           <a class="nav-link" href="/" style="color: black;">Home <span class="sr-only">(current)</span></a>
         </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{{url_for('main.new_blog', uname=current_user.username)}}" style="color: black;">
+            Add a blog</a>
+        </li>
         {% if current_user.is_authenticated %}
         <li class="nav-item">
           <a class="nav-link" style="color: black;"

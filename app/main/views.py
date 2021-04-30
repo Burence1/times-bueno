@@ -16,3 +16,22 @@ def index():
 
   title="Times Bueno"
   return render_template('index.html',blogs=blogs,recent=recent,title=title)
+
+@main.route('/new_blog',methods=["GET","POST"])
+def new_blog():
+  '''
+  function to add new blogs to the application
+  '''
+  form=AddBlog()
+  if form.validate_on_submit():
+    title=form.title.data
+    contents=form.contents.data
+    user=current_user
+    blog=Blog(title=title,contents=contents,user=user)
+    blog.save_blogs()
+
+    flash("Blog successfully saved")
+    return redirect(url_for("main.index"))
+
+  title="Add your blog"
+  return render_template('new_blog.html',title=title,form=form)
