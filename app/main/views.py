@@ -1,11 +1,12 @@
-from .forms import AddBlog,AddComment,AddSubscriber,UpdateProfile
+from .forms import AddBlog,AddComment,AddSubscriber,UpdateProfile,SubscribeEmail
 from flask import url_for,request,redirect,render_template,abort,flash
 from . import main
-from ..models import User,Blog,Comment,Subscribe
+from ..models import User,Blog,Comment,Subscribe,Subscribe
 from flask_login import current_user,login_required
 from .. import db,photos
 from ..request import get_quotes, get_more_quotes
 from werkzeug import secure_filename
+from ..email import subscriber_mail
 
 
 @main.route('/',methods=['GET','POST'])
@@ -60,7 +61,7 @@ def new_comment():
 def user_blogs(username):
   user=User.query.filter_by(username=username).first()
   blog=Blog.query.filter_by(user=user).order_by(Blog.posted_on.desc()).all()
-  return render_template("profile.html",blog=blog,user=user)
+  return redirect(url_for("main.profile",blog=blog,uname=username))
 
 @main.route('/del_comment/<blog_id>/<comment_id>',methods=["POST","GET"])
 @login_required

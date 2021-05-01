@@ -100,6 +100,10 @@ class Blog(db.Model):
   def all_blogs(cls):
     blogs=Blog.query.all()
     return blogs
+  @classmethod
+  def get_user_blogs(cls,id):
+    blogs=Blog.query.filter_by(user_id=id).all()
+    return blogs
 
   def __repr__(self):
     return f"Blog {self.title}:{self.contents}"

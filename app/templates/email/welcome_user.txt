@@ -1,0 +1,6 @@
+Hello {{user.username}}
+Welcome to Times Bueno
+Thank you for joining Times Bueno, now you can proceed to write/read exciting blogs
+courtesy of our site.
+
+Bienvenu(Welcome)!!!
