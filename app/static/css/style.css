@@ -25,3 +25,11 @@
 background-image: linear-gradient(to right, #8e9eab 0%, #eef2f3  51%, #8e9eab  100%)
 }      
 
+#blog{
+  margin-top: 4em;
+}
+
+#head{
+background-image: linear-gradient(to right, #304352 0%, #d7d2cc  51%, #304352  100%)
+}
+         

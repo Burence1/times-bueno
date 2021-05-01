@@ -25,7 +25,7 @@ class ProdConfig(Config):
   '''
   production configurations, child class
   '''
-  pass
+  SQLALCHEMY_DATABASE_URI = "postgresql://yvcdjrrkthyxib:b1b160e9b35c5f7bd30bf57019c41b6ad217723e19345308753dcc1dbb6a31e0@ec2-18-233-83-165.compute-1.amazonaws.com:5432/d9sjsj062k7jpa?sslmode=require"
 
 class DevConfig(Config):
   '''
