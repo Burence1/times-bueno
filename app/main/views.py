@@ -101,16 +101,17 @@ def delete_blog(blog_id):
 @main.route('/update_blog/<blog_id>',methods=["GET","POST"])
 @login_required
 def update_blog(blog_id):
-  blog=Blog.query.get_blogs(blog_id)
+  blog=Blog.get_blogs(blog_id)
   if blog.user != current_user:
     abort(404)
   form=AddBlog()
   if form.validate_on_submit():
-    title = form.title.data
+    blog.title = form.title.data
     filename = photos.save(form.photo.data)
     image_pic_path = f'photos/{filename}'
-    contents = form.contents.data
-    user = current_user
+    blog.contents = form.contents.data
+    blog.user = current_user
+    blog.image_pic_path=image_pic_path
     db.session.commit()
     mailList=Subscribe.query.all()
     subscribers=[]
@@ -123,8 +124,8 @@ def update_blog(blog_id):
   elif request.method == 'GET':
     form.title.data=blog.title
     form.contents.data=blog.contents
-    title="Update blog"
-    return render_template('new_blog',title=title,form=form)
+  title="Update blog"
+  return render_template('new_blog.html',title=title,form=form)
 
 
 @main.route('/user/<uname>')
