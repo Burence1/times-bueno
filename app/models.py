@@ -121,3 +121,14 @@ class Subscribe(db.Model):
 
   def __repr__(self):
     return f"Subscribe {self.email}"
+
+
+class Quote:
+  '''
+  Quote class that defines quotes instances
+  '''
+  def __init__(self,id,author,quote):
+
+    self.id=id
+    self.author=author
+    self.quote=quote
