@@ -4,18 +4,22 @@ from . import main
 from ..models import User,Blog,Comment,Subscribe
 from flask_login import current_user,login_required
 from .. import db,photos
+from ..request import get_quotes, get_more_quotes
+from werkzeug import secure_filename
 
 
-@main.route('/')
+@main.route('/',methods=['GET','POST'])
 def index():
   '''
   home/landing page
   '''
+  quote=get_quotes()
+  quotes=get_more_quotes(1, get_quotes)
   blogs=Blog.query.all()
   recent=Blog.query.order_by(Blog.posted_on.desc()).all()
 
   title="Times Bueno"
-  return render_template('index.html',blogs=blogs,recent=recent,title=title)
+  return render_template('index.html',blogs=blogs,recent=recent,quotes=quotes,title=title)
 
 @main.route('/new_blog',methods=["GET","POST"])
 def new_blog():

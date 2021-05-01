@@ -1,11 +1,11 @@
 import urllib.request,json
 from .models import Quote
 
-quote_url=None
-
-def configure_request(app):
-  global quote_url
-  quote_url=app.config['QUOTES URL']
+# quote_url=None
+quote_url = 'http://quotes.stormconsultancy.co.uk/random.json'
+# def configure_request(app):
+#   global quote_url
+#   quote_url = 'http://quotes.stormconsultancy.co.uk/random.json'
 
 def get_quotes():
   '''
@@ -26,7 +26,7 @@ def get_quotes():
 
 def get_more_quotes(times,get_quotes):
   quotes=[]
-  for i in range[times]:
+  for i in range(times):
     quote=get_quotes()
     quotes.append(quote)
   return quotes
