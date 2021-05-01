@@ -11,3 +11,17 @@
   color: black;
   text-align: center;
 }
+#next{
+ background-image: linear-gradient(to right, #485563 0%, #29323c  51%, #485563  100%)
+}
+
+.btn:hover {
+  background-position: right center; /* change the direction of the change here */
+  color: #fff;
+  text-decoration: none;
+}
+
+#subscribe{
+background-image: linear-gradient(to right, #8e9eab 0%, #eef2f3  51%, #8e9eab  100%)
+}      
+

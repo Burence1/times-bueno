@@ -92,7 +92,7 @@ def delete_comment(blog_id,comment_id):
 def delete_blog(blog_id):
   blog=Blog.get_blogs(blog_id)
   if blog.user != current_user:
-    abort(404)
+    abort(403)
   blog.delete_blogs()
   
   flash("blog deleted")
@@ -108,7 +108,7 @@ def update_blog(blog_id):
   if form.validate_on_submit():
     title = form.title.data
     filename = photos.save(form.photo.data)
-    image_pic_path = photos.url(filename)
+    image_pic_path = f'photos/{filename}'
     contents = form.contents.data
     user = current_user
     db.session.commit()
@@ -172,7 +172,7 @@ def blogs(blog_id):
     blog = Blog.get_blogs(blog_id)
     if blog is None:
         abort(404)
-    all_comments = Comment.get_comments(blog_id)
+    all_comments = Comment.get_comments(blog.id)
     comment_form = AddComment()
     if comment_form.validate_on_submit():
         comment = Comment(contents=comment_form.contents.data,user=current_user, blog_id=blog_id)

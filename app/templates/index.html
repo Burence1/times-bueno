@@ -12,9 +12,9 @@
   {% block content %}
   <div class="jumbotron" id="jumbotron">
     {% for quote in quotes %}
-    <p><strong>{{quote.quote}}</strong></p>
+    <p><strong><i class="fa fa-quote-left" aria-hidden="true"></i> {{quote.quote}} <i class="fa fa-quote-right" aria-hidden="true"></i></strong></p>
     <p><strong>By: <blockquote>{{quote.author}}</blockquote></strong></p>
-    <a class="btn btn-primary btn-lg" href="/" role="button">Next Quote</a>
+    <a class="btn btn-primary btn-lg" href="/" role="button" id="next">Next Quote</a>
     {%endfor%}
   </div>
   <div class="row ">
@@ -32,7 +32,10 @@
         style="color:gray"><strong>Author: {{blog.user.username}}</strong></span></a></p>
           <div class="row">
             <div class="col-md-6"><a href="{{url_for('main.blogs',blog_id=blog.id)}}"><h5>Read More <i class="bi bi-box-arrow-up-right"></i></h5></a></div>
-            <div class="col-md-6"><h5><a class="nav-link" style="color: black;" href="{{url_for('main.delete_blog',blog_id=blog.id)}}"><i class="fa fa-trash" aria-hidden="true"></i> Delete Blog</h5></a></div>
+            <div class="col-md-6">
+              <h5><a class="nav-link" style="color: black;" href="{{url_for('main.delete_blog',blog_id=blog.id)}}"><i
+                    class="fa fa-trash" aria-hidden="true"></i> Delete Blog</h5></a>
+            </div>
           </div>
       </div>
     </div>
@@ -64,14 +67,18 @@
     </div>
     {%endfor%}
   </div>
-  <div class="pt-4">
-    <div class="row">
-      <div class="col-md-4"></div>
-      <div class="col-md-4">
-        <p>Be the first one to be notified of a new post</p>
-        {{wtf.quick_form(form)}}
+  <div class="jumbotron jumbotron-fluid" id="subscribe">
+    <div class="container">
+      <div class="pt-4">
+        <div class="row">
+          <div class="col-md-4"></div>
+          <div class="col-md-4">
+            <p>Subscribe for real-time updates</p>
+            {{wtf.quick_form(form)}}
+          </div>
+          <div class="col-md-4"></div>
+        </div>
       </div>
-      <div class="col-md-4"></div>
     </div>
   </div>
   {%endblock%}
