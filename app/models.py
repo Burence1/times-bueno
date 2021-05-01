@@ -112,7 +112,6 @@ class Subscribe(db.Model):
   __tablename__='subscribes'
 
   id =db.Column(db.Integer,primary_key=True)
-  name=db.Column(db.String(50),index=True)
   email=db.Column(db.String(255),unique=True)
 
   def save_subscriber(self):

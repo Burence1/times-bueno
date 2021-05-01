@@ -1,7 +1,7 @@
 from .forms import AddBlog,AddComment,AddSubscriber,UpdateProfile,SubscribeEmail
 from flask import url_for,request,redirect,render_template,abort,flash
 from . import main
-from ..models import User,Blog,Comment,Subscribe,Subscribe
+from ..models import User,Blog,Comment,Subscribe
 from flask_login import current_user,login_required
 from .. import db,photos
 from ..request import get_quotes, get_more_quotes
@@ -18,9 +18,15 @@ def index():
   quotes=get_more_quotes(1, get_quotes)
   blogs=Blog.query.all()
   recent=Blog.query.order_by(Blog.posted_on.desc()).all()
+  form=SubscribeEmail()
+  if form.validate_on_submit():
+    email=form.email.data
+    new_post=Subscribe(email=email)
+    new_post.save_subscriber()
+    return redirect(url_for('main.index'))
 
   title="Times Bueno"
-  return render_template('index.html',blogs=blogs,recent=recent,quotes=quotes,title=title)
+  return render_template('index.html',blogs=blogs,recent=recent,quotes=quotes,title=title,form=form)
 
 @main.route('/new_blog',methods=["GET","POST"])
 def new_blog():
@@ -36,6 +42,12 @@ def new_blog():
     user=current_user
     blog=Blog(title=title,contents=contents,user=user,image_pic_path=image_pic_path)
     blog.save_blogs()
+    mailList=Subscribe.query.all()
+    subscribers=[]
+    for subscriber in mailList:
+      subscribers.append(subscriber.email)
+    for subscriber in subscribers:
+      subscriber_mail("New Post Alert!","email/subscribe",subscriber,user=current_user,blog=blog)
 
     flash("Blog successfully saved")
     return redirect(url_for("main.index"))
@@ -100,6 +112,12 @@ def update_blog(blog_id):
     contents = form.contents.data
     user = current_user
     db.session.commit()
+    mailList=Subscribe.query.all()
+    subscribers=[]
+    for subscriber in mailList:
+      subscribers.append(subscriber.email)
+    for subscriber in subscribers:
+      subscriber_mail("Updated post Alert!","email/subscribe",subscriber,user=current_user)
     flash("Blog Updated")
     return redirect(url_for('main.index',blog_id=blog_id))
   elif request.method == 'GET':
@@ -137,12 +155,9 @@ def update_profile(uname):
     user = User.query.filter_by(username=uname).first()
     if user is None:
         abort(404)
-
     form = UpdateProfile()
-
     if form.validate_on_submit():
         user.bio = form.bio.data
-
         db.session.add(user)
         db.session.commit()
 
@@ -165,4 +180,12 @@ def blogs(blog_id):
 
         flash('Your comment has been added!', 'success')
         return redirect(url_for('main.blogs', blog_id=blog.id))
+    form=SubscribeEmail()
+    if form.validate_on_submit():
+      email=form.email.data
+      new_blog=Subscribe(email=email)
+      new_blog.save_subscriber()
+
+      return redirect(url_for('main.blogs',blog_id=blog.id))
+
     return render_template('blog.html', blog=blog, comments=all_comments, comment_form=comment_form)

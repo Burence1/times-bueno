@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% import 'bootstrap/wtf.html' as wtf%}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -62,6 +63,16 @@
       </div>
     </div>
     {%endfor%}
+  </div>
+  <div class="pt-4">
+    <div class="row">
+      <div class="col-md-4"></div>
+      <div class="col-md-4">
+        <p>Be the first one to be notified of a new post</p>
+        {{wtf.quick_form(form)}}
+      </div>
+      <div class="col-md-4"></div>
+    </div>
   </div>
   {%endblock%}
 </body>
