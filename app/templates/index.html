@@ -26,7 +26,7 @@
           <img src="{{url_for('static',filename=blog.image_pic_path)}}" alt="" style="height: 15em;width: 100%;"><br>
         {% endif %}
         <h4>{{blog.title | upper}}</a></h4><br>
-        <p>{{blog.contents | truncate(150)}}</p>
+        <p>{{blog.contents}}</p>
         <p>Posted on : {{blog.posted_on.strftime('%d-%m-%Y at %H:%M:%S')}}</p>
         <p id="usern"><a href="{{url_for('main.user_blogs',username = blog.user.username)}}"><span
         style="color:gray"><strong>Author: {{blog.user.username}}</strong></span></a></p>
@@ -50,7 +50,7 @@
         <img src="{{url_for('static',filename=blog.image_pic_path)}}" alt="" style="height: 15em;width: 100%;"><br>
         {% endif %}
         <h4><strong>{{blog.title | upper | truncate(50)}}</strong></a></h4><br>
-        <p>{{blog.contents| truncate(150)}}</p>
+        <p>{{blog.contents}}</p>
         <p>Posted on : {{blog.posted_on.strftime('%d-%m-%Y at %H:%M:%S')}}</p>
         <p><a href="{{url_for('main.user_blogs',username = blog.user.username)}}"><span
         style="color:gray"><strong>Author: {{blog.user.username}}</strong></span></a></p>

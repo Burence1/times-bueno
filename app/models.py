@@ -76,9 +76,9 @@ class Blog(db.Model):
   __tablename__='blogs'
 
   id=db.Column(db.Integer,primary_key=True)
-  title=db.Column(db.String(150))
-  image_pic_path = db.Column(db.String(255))
-  contents=db.Column(db.String())
+  title=db.Column(db.String())
+  image_pic_path = db.Column(db.String())
+  contents=db.Column(db.Text())
   posted_on=db.Column(db.DateTime,default=datetime.utcnow)
   user_id=db.Column(db.Integer,db.ForeignKey("users.id"))
   comments=db.relationship("Comment",backref='blog',lazy='dynamic')
