@@ -73,7 +73,7 @@ def new_comment():
 def user_blogs(username):
   user=User.query.filter_by(username=username).first()
   blog=Blog.query.filter_by(user=user).order_by(Blog.posted_on.desc()).all()
-  return redirect(url_for("main.profile",blog=blog,uname=username))
+  return redirect(url_for("main.profile",blogs=blog,uname=username))
 
 @main.route('/del_comment/<blog_id>/<comment_id>',methods=["POST","GET"])
 @login_required
