@@ -32,4 +32,8 @@ background-image: linear-gradient(to right, #8e9eab 0%, #eef2f3  51%, #8e9eab  1
 #head{
 background-image: linear-gradient(to right, #304352 0%, #d7d2cc  51%, #304352  100%)
 }
-         
+
+#error{
+  width: 100%;
+  height: auto;
+}
