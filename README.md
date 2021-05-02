@@ -14,6 +14,11 @@
      alt="Homepage"
      style="float: center; margin-right: 10px;" />
 
+## All Blogs
+<img src="./app/static/images/allblogs.png"
+     alt="Homepage"
+     style="float: center; margin-right: 10px;" />
+
 ## Blog In Page
 <img src="./app/static/images/blog.png"
      alt="Homepage"
