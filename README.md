@@ -9,6 +9,31 @@
      alt="Homepage"
      style="float: center; margin-right: 10px;" />
 
+## Recent Blogs
+<img src="./app/static/images/recent.png"
+     alt="Homepage"
+     style="float: center; margin-right: 10px;" />
+
+## Blog In Page
+<img src="./app/static/images/blog.png"
+     alt="Homepage"
+     style="float: center; margin-right: 10px;" />
+
+## Comments on blog
+<img src="./app/static/images/comment.png"
+     alt="Homepage"
+     style="float: center; margin-right: 10px;" />
+
+## Author Profile
+<img src="./app/static/images/profile.png"
+     alt="Homepage"
+     style="float: center; margin-right: 10px;" />
+
+## Add Blog
+<img src="./app/static/images/addblog.png"
+     alt="Homepage"
+     style="float: center; margin-right: 10px;" />
+
 ## Setup/Installation
 * Navigate to the project repository via https://github.com/Burence1/times-bueno.git
 * Change your working directory to the clone location of your preference.
