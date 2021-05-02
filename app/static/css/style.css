@@ -37,3 +37,23 @@ background-image: linear-gradient(to right, #304352 0%, #d7d2cc  51%, #304352  1
   width: 100%;
   height: auto;
 }
+
+
+#edit {background-image: linear-gradient(to right, #4b6cb7 0%, #182848  51%, #4b6cb7  100%)}
+#edit {
+  margin: 10px;
+  padding: 10px 10px;
+  text-align: center;
+  text-transform:capitalize;
+  transition: 0.5s;
+  background-size: 200% auto;
+  color: white;            
+  box-shadow: 0 0 20px #eee;
+  border-radius: 15px;
+}
+
+#edit:hover {
+  background-position: right center; /* change the direction of the change here */
+  color: #fff;
+  text-decoration: none;
+}   
