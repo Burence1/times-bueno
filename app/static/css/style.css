@@ -15,7 +15,14 @@
  background-image: linear-gradient(to right, #485563 0%, #29323c  51%, #485563  100%)
 }
 
-.btn:hover {
+#next{
+  transition: 0.5s;
+  color: white;            
+  box-shadow: 0 0 20px #eee;
+  background-size: 200% auto;
+}
+
+#next:hover {
   background-position: right center; /* change the direction of the change here */
   color: #fff;
   text-decoration: none;
